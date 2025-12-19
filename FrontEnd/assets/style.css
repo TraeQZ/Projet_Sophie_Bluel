@@ -94,7 +94,10 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
+nav a {
+    text-decoration: none; /* Enlève le soulignement */
+    color: black;          /* Remplace le bleu par du noir (ou la couleur de ton choix) */
+}
 li:hover {
 	color: #B1663C;
 }
@@ -235,17 +238,16 @@ footer nav ul {
 
 /* Centrage général du contenu et couleur de fond */
 body {
-    background-color: #FFFEF8; /* Couleur très claire pour respecter la maquette */
-}
+    background-color: #FFFEF8; 
 
 /* Titre "Log In" */
 #login h2 {
     font-family: 'Syne', sans-serif;
     font-size: 30px;
     font-weight: 700;
-    color: #1D6154; /* Utilisation de la couleur verte du site */
+    color: #1D6154; 
     text-align: center;
-    margin-top: 150px; /* Espace vertical important */
+    margin-top: 150px; 
     margin-bottom: 50px;
 }
 
@@ -295,13 +297,17 @@ body {
     margin-top: 30px; 
     margin-bottom: 20px;
 }
-
+.active-link {
+    font-weight: 600; 
+}
 /* Lien "Mot de passe oublié" */
 .forgot-password {
     font-family: 'Work Sans', sans-serif;
     font-size: 14px;
+	font-weight: 500 ;
     color: #3D3D3D;
     text-decoration: underline;
     text-align: center;
     display: block; /* Pour s'assurer qu'il prend toute la ligne pour le centrage */
+}
 }

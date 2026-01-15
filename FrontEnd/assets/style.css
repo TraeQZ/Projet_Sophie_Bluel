@@ -1,0 +1,561 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+section {
+	margin: 50px 0
+}
+
+h1{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1 > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+;
+}
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+nav a {
+    text-decoration: none; /* Enlève le soulignement */
+    color: black;          /* Remplace le bleu par du noir (ou la couleur de ton choix) */
+}
+li:hover {
+	color: #B1663C;
+}
+#introduction {
+	display: flex;
+	align-items: center;
+}
+#introduction figure {
+	flex: 1
+}
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+#portfolio h2 {
+	text-align: center;
+	margin-bottom: 1em;
+}
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+
+}
+#contact {
+	width: 50%;
+margin: auto;
+}
+#contact > * {
+	text-align: center;
+
+}
+#contact h2{
+	margin-bottom: 20px;
+}
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+.filters {
+	width: 585px; 
+    height: 38px;
+    
+    /* Centrage horizontal */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Positionnement vertical et espace entre les éléments */
+    display: flex; 
+    justify-content: center;
+    align-items: center; /* Assure que les boutons sont bien centrés verticalement */
+    gap: 20px; /* Espace entre les boutons */
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+/* 2. Style par défaut de TOUS les boutons */
+.filter-button {
+    font-family: 'Syne', sans-serif; 
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%; /* Assure une hauteur de ligne compacte */
+    text-align: center; 
+    
+    
+    height: 37px;
+    border: 1px solid #1D6154; 
+    border-radius: 60px; 
+    
+    color: #1D6154; 
+    background-color: white; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
+
+    line-height: 37px;
+}
+
+.filter-button.active-filter {
+    color: white; 
+    background-color: #1D6154; 
+    border-color: #1D6154;
+}
+/* ================================================= */
+/* PAGE DE CONNEXION (LOGIN) */
+/* ================================================= */
+
+/* Centrage général du contenu et couleur de fond */
+body {
+    background-color: #FFFEF8; 
+
+/* Titre "Log In" */
+#login h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #1D6154; 
+    text-align: center;
+    margin-top: 150px; 
+    margin-bottom: 50px;
+}
+
+/* Conteneur du formulaire */
+#login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer le formulaire */
+    width: 380px; /* Largeur du formulaire basé sur les champs de la maquette */
+    margin: 0 auto;
+}
+
+/* Labels des champs (E-mail, Mot de passe) */
+#login label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 7px;
+    align-self: flex-start; /* Aligner les labels à gauche du formulaire */
+}
+
+/* Champs de saisie (inputs) */
+#login input[type="email"],
+#login input[type="password"] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); /* Ombre légère pour le champ */
+    padding: 0 10px;
+    font-size: 1.2em;
+}
+
+/* Bouton "Se connecter" (Style du bouton principal du site) */
+#login input[type="submit"] {
+    font-family: 'Syne', sans-serif;
+    color: white;
+    background-color: #1D6154;
+    font-weight: 700;
+    font-size: 1em;
+    border: none;
+    border-radius: 60px;
+    height: 38px;
+    width: 179px; /* Largeur du bouton basé sur la maquette */
+    text-align: center;
+    cursor: pointer;
+    margin-top: 30px; 
+    margin-bottom: 20px;
+}
+.active-link {
+    font-weight: 600; 
+}
+/* Lien "Mot de passe oublié" */
+.forgot-password {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+	font-weight: 500 ;
+    color: #3D3D3D;
+    text-decoration: underline;
+    text-align: center;
+    display: block; /* Pour s'assurer qu'il prend toute la ligne pour le centrage */
+}
+}
+
+#admin-bar {
+    background-color: black;
+    color: white;
+    height: 50px; /* Important : donne lui une hauteur ! */
+    width: 100%;
+    display: none; /* Le JS le passera en 'flex' */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1000;
+}
+#portfolio h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    gap: 20px;               
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* On s'assure que le lien modifier ne casse pas le style du titre */
+.edit-link {
+    font-family: 'Work Sans', sans-serif; /* Police normale pour le bouton */
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* 1. Le conteneur (fond sombre) */
+#modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Gris transparent */
+    display: none; /* Changé en 'flex' par le JS */
+    align-items: center;    /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    z-index: 2000;
+}
+
+/* 2. La boîte blanche (le contenu) */
+.modal-wrapper {
+    background-color: white;
+    /* Dimensions de ta maquette */
+    width: 630px;
+    height: 688px;
+    border-radius: 10px;
+    
+    /* Centrage parfait peu importe l'écran */
+    padding: 60px 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box; /* Pour que le padding ne dépasse pas des 630px */
+}
+/* 3. Le bouton de fermeture (croix) */
+#modal-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* 4. Le titre et la galerie */
+.modal-wrapper h3 {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin-bottom: 45px;
+}
+
+.modal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 10px; /* 20px entre les lignes, 10px entre les colonnes */
+    margin-top: 10px;
+    margin-bottom: 45px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #B3B3B3;
+    /* Permet de voir toutes les photos sans agrandir la modale */
+    overflow-y: auto; 
+    max-height: 400px; 
+}
+
+.modal-figure {
+    position: relative;
+    width: 78.12px;
+    height: 104.08px;
+}
+
+.modal-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.btn-main, #btn-go-to-add {
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 10px 50px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 auto; /* Centre le bouton horizontalement */
+    display: block;
+    width: fit-content;
+}
+
+.btn-main:hover {
+    background-color: #0E2F28; /* Un peu plus sombre au survol */
+}
+/* Le carré noir qui contient l'icône */
+.delete-icon {
+    /* Dimensions exactes du rectangle noir */
+    width: 17px;
+    height: 17px;
+    background-color: black;
+    color: white;
+    border-radius: 2px;
+
+    /* Positionnement par rapport à la miniature */
+    position: absolute;
+    top: 6px; 
+    right: 6px;
+
+    /* Centrage de l'icône de la poubelle à l'intérieur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.delete-icon i {
+    /* Dimensions de l'icône à l'intérieur du carré */
+    width: 9px;
+    height: 10.28px;
+    font-size: 10px; /* Ajustement de la taille de police FontAwesome */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+hr {display:none}
+/* =====================Modale d'ajout============================ */
+.modal-wrapper {
+    width: 630px;
+    height: 670px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 30px 100px; /* Ajuste le padding pour centrer le contenu */
+    box-sizing: border-box;
+}
+.upload-area {
+    width: 420px;
+    height: 169px;
+    background: #E8F1F6;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto; /* Centrage horizontal */
+}
+
+/* L'icône de montagne (76x76) */
+.upload-area i {
+    width: 76px;
+    height: 76px;
+    font-size: 76px; /* Taille pour l'icône FontAwesome */
+    color: #B9C5CC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-main {
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 auto; /* Pour le centrer */
+    background: #1D6154; /* Couleur par défaut (actif) */
+}
+
+/* État désactivé selon tes données Figma */
+.btn-main:disabled {
+    background: #A7A7A7;
+    cursor: not-allowed;
+}
+#work-title, #work-category {
+    width: 420px;
+    height: 51px; /* Hauteur standard pour ce projet */
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    margin-bottom: 20px;
+}
+#modal-back {
+    width: 21px;
+    height: 21px;
+    font-size: 21px; /* Pour que l'icône FontAwesome prenne la taille demandée */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000; /* Ou la couleur de ton choix */
+    
+    /* Positionnement dans la barre de navigation de la modale */
+    position: absolute;
+    top: 26px;  /* Ajusté pour être harmonieux avec tes 686px Figma par rapport au haut de la modale */
+    left: 30px; /* Ajusté pour correspondre à tes 435px Figma par rapport au bord gauche */
+}
+
+/* On s'assure que l'icône à l'intérieur suit la taille */
+#modal-back i {
+    width: 21px;
+    height: 21px;
+}
+.input-group input:focus, 
+.input-group select:focus {
+    outline: none;
+}
+#work-category {
+    border: none !important; 
+    outline: none; 
+}
+

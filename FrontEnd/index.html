@@ -37,11 +37,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             <h3>Ajout photo</h3>
             <form id="form-add-work">
                 <div class="upload-area">
-                    <i class="fa-regular fa-image"></i>
-                    <label for="file-upload" class="label-file">+ Ajouter photo</label>
-                    <input type="file" id="file-upload" accept="image/png, image/jpeg" hidden>
-                    <p>jpg, png : 4mo max</p>
-                </div>
+    <div id="upload-design-content">
+        <i class="fa-regular fa-image"></i>
+        <label for="file-upload" class="label-file">+ Ajouter photo</label>
+        <input type="file" id="file-upload" accept="image/png, image/jpeg" hidden>
+        <p>jpg, png : 4mo max</p>
+    </div>
+
+    <div id="preview-container"></div>
+</div>
                 <div class="input-group">
                     <label>Titre</label>
                     <input type="text" id="work-title">
@@ -52,7 +56,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                         </select>
                 </div>
                 <hr>
-                <input type="submit" value="Valider" class="btn-main btn-disabled" disabled>
+                <input type="submit" id="btn-submit-work" value="Valider" class="btn-main btn-disabled" disabled>
             </form>
         </div>
     </div>

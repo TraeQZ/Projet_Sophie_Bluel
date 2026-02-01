@@ -489,7 +489,10 @@ hr {display:none}
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 30px auto; /* Centrage horizontal */
+    margin: 0 auto 30px auto;
+     /* Centrage horizontal */
+     position: relative;
+     overflow: hidden;
 }
 
 /* L'icône de montagne (76x76) */
@@ -559,3 +562,55 @@ hr {display:none}
     outline: none; 
 }
 
+.upload-area i, 
+.upload-area p, 
+.upload-area #upload-design-content {
+    pointer-events: none; /* Le clic "traverse" ces éléments pour atteindre le label */
+}
+
+.label-file {
+    pointer-events: auto; /* On s'assure que le label, lui, reçoit bien le clic */
+    cursor: pointer;
+}
+/* L'image d'aperçu doit remplir le conteneur sans le déformer */
+.hidden-content {
+    display: none !important;
+}
+
+/* Style de l'image d'aperçu pour correspondre à tes dimensions */
+.preview-img {
+    max-width: 129px;
+    max-height: 193px;
+    object-fit: cover;
+}
+
+
+/* Style du bouton valider quand il est actif */
+.btn-main:not(:disabled) {
+    background-color: #1D6154 !important;
+    cursor: pointer;
+}
+.upload-area {
+    position: relative;            /* permet le contrôle interne */
+    overflow: hidden;              /* empêche tout débordement */
+}
+#upload-design-content {
+    display: flex;                 /* organisation verticale */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#preview-container {
+    width: 100%;
+    height: 100%;
+    display: none;                 /* centre l’image */
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+}
+/* Quand une image est affichée, on cache le texte */
+.upload-area.has-preview #upload-design-content {
+    display: none;
+}

@@ -1,26 +1,22 @@
 /**
- * GESTION DE LA SUPPRESSION DES TRAVAUX (Vue 1 de la modale)
+ * Gestion de la modale : suppression et ajout de travaux
  */
 
-// Fonction pour charger la galerie de miniatures dans la modale
+// Charge les miniatures dans la galerie modale
 async function loadModalGallery() {
     const modalGallery = document.querySelector(".modal-gallery-grid");
     if (!modalGallery) return;
 
     try {
-        // 1. Récupération des travaux depuis l'API
         const response = await fetch("http://localhost:5678/api/works");
         const works = await response.json();
 
-        // 2. Nettoyage de la galerie avant affichage
         modalGallery.innerHTML = "";
 
-        // 3. Création des miniatures
         works.forEach(work => {
             const figure = document.createElement("figure");
             figure.className = "modal-figure";
             
-            // Structure avec l'icône poubelle bien positionnée
             figure.innerHTML = `
                 <img src="${work.imageUrl}" alt="${work.title}">
                 <span class="delete-icon" data-id="${work.id}">
@@ -30,7 +26,7 @@ async function loadModalGallery() {
 
             modalGallery.appendChild(figure);
 
-            // 4. Écouteur d'événement sur l'icône de suppression
+            // Clic sur l'icône poubelle => suppression
             const trashBtn = figure.querySelector(".delete-icon");
             trashBtn.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -43,41 +39,22 @@ async function loadModalGallery() {
     }
 }
 
-// Fonction pour supprimer un projet via l'API
+// Supprime un projet via l'API
 async function deleteWork(id) {
     const token = localStorage.getItem("token");
-    
-    if (!confirm("Voulez-vous vraiment supprimer ce projet ?")) return;
-
-    try {
-        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if (response.ok) {
-            console.log(`Projet ${id} supprimé avec succès`);
-            
-            // On recharge la galerie de la modale
-            loadModalGallery();
-            
-            // On recharge la galerie de la page d'accueil (index.html)
-            if (typeof fetchWorks === 'function') {
-                fetchWorks();
-            }
-        } else {
-            alert("Erreur lors de la suppression du projet.");
-        }
-    } catch (error) {
-        console.error("Erreur DELETE :", error);
+    const reponse = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {"Authorization": `Bearer ${token}`}
+    });
+    if (reponse .ok){
+        document.querySelector('[data-id="${id}"]')?.remove();
     }
 }
-//=======================================Ajout de travaux===================
 
-//La Navigation entre les vues
-// On utilise l'ID présent dans ton HTML
+
+/* ===== AJOUT DE TRAVAUX ===== */
+
+// Navigation entre les deux vues de la modale
 const btnGoToAdd = document.getElementById("btn-go-to-add");
 const modalGalleryView = document.getElementById("modal-view-gallery");
 const modalAddView = document.getElementById("modal-view-add");
@@ -86,29 +63,27 @@ const btnBack = document.getElementById("modal-back");
 if (btnGoToAdd) {
     btnGoToAdd.addEventListener("click", () => {
         modalGalleryView.style.display = "none";
-        modalAddView.style.display = "block"; // Ou "flex" selon ton CSS
-        btnBack.style.visibility = "visible"; // On affiche la flèche retour
+        modalAddView.style.display = "block";
+        btnBack.style.visibility = "visible";
+        loadCategories();
     });
 }
 
-// Pour revenir en arrière
 if (btnBack) {
     btnBack.addEventListener("click", () => {
         modalGalleryView.style.display = "block";
         modalAddView.style.display = "none";
-        btnBack.style.visibility = "hidden"; // On cache la flèche
+        btnBack.style.visibility = "hidden";
     });
 }
 
-//Aperçu de l'image et Catégories dynamiques
-//On déclare que la fonction est asynchrone
+// Récupère les catégories depuis l'API pour le menu déroulant
 async function loadCategories() {
     const select = document.querySelector("#work-category");
     const response = await fetch("http://localhost:5678/api/categories");
     const categories = await response.json();
     
-    // On vide avant d'ajouter (pour éviter les doublons au cas où)
-    select.innerHTML = '<option value=""></option>'; 
+    select.innerHTML = '<option value=""></option>';
     
     categories.forEach(cat => {
         const option = document.createElement("option");
@@ -118,28 +93,35 @@ async function loadCategories() {
     });
 }
 
-//Prévisualisation de l'image :
-const inputImg = document.querySelector("#file-upload"); // Ton input type="file"
-const previewContainer = document.querySelector(".preview-container");
+// Prévisualisation de l'image sélectionnée
+const inputImg = document.querySelector("#file-upload");
+const previewContainer = document.querySelector("#preview-container");
+const uploadContent = document.querySelector("#upload-design-content");
+const uploadArea = document.querySelector(".upload-area");
 
 inputImg.addEventListener("change", () => {
     const file = inputImg.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
+            previewContainer.innerHTML = '';
+
             const img = document.createElement("img");
             img.src = e.target.result;
             img.classList.add("preview-img");
-            // Masquer l'icône et le bouton d'upload, afficher l'image
-            document.querySelector(".upload-design").style.display = "none";
             previewContainer.appendChild(img);
+            
+            // Affiche l'aperçu, masque le contenu d'upload
+            previewContainer.style.display = 'flex';
+            if (uploadContent) uploadContent.style.display = "none";
+            uploadArea.classList.add("has-preview");
         };
         reader.readAsDataURL(file);
     }
 });
 
-//L'envoi des données (POST avec FormData)
 
+// Envoie un nouveau projet à l'API
 async function addNewWork(e) {
     e.preventDefault();
     
@@ -148,7 +130,6 @@ async function addNewWork(e) {
     const image = document.querySelector("#file-upload").files[0];
     const token = localStorage.getItem("token");
 
-    // --- Vérification avant envoi ---
     if (!title || !category || !image) {
         alert("Veuillez remplir tous les champs et ajouter une image.");
         return;
@@ -164,20 +145,18 @@ async function addNewWork(e) {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`
-                // Note : NE PAS mettre "Content-Type" ici, le navigateur le gère pour FormData
+                // Pas de Content-Type ici, FormData le gère automatiquement
             },
             body: formData
         });
 
         if (response.ok) {
             const newWork = await response.json();
-            // 1. Rafraîchir les galeries (Accueil + Modale)
             loadModalGallery();
             if (typeof fetchWorks === 'function') fetchWorks();
             
-            // 2. Réinitialiser le formulaire et revenir à la vue galerie
-            resetForm(); 
-            btnBack.click(); 
+           
+            btnBack.click();
         } else {
             alert("Erreur lors de l'envoi.");
         }
@@ -185,3 +164,30 @@ async function addNewWork(e) {
         console.error("Erreur POST :", error);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#form-add-work");
+    if (form) form.addEventListener("submit", addNewWork);
+});
+
+// Vérifie que tous les champs sont remplis pour activer le bouton
+const formAddWork = document.querySelector("#modal-view-add form");
+const submitBtn = document.getElementById("btn-submit-work");
+
+function checkForm() {
+    const title = document.querySelector("#work-title").value || "";
+    const category = document.querySelector("#work-category").value || "";
+    const image = document.querySelector("#file-upload").files[0] || null;
+
+    if (title && category && image) {
+        submitBtn.style.backgroundColor = "#1D6154";
+        submitBtn.disabled = false;
+    } else {
+        submitBtn.style.backgroundColor = "#A7A7A7";
+        submitBtn.disabled = true;
+    }
+}
+
+document.querySelector("#work-title").addEventListener("input", checkForm);
+document.querySelector("#work-category").addEventListener("change", checkForm);
+document.querySelector("#file-upload").addEventListener("change", checkForm);
